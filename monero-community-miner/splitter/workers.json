@@ -1,0 +1,11 @@
+{
+  "workers": [
+    {
+      "name": "TuoRig",
+      "address": "4ACRog3NPq96kxjgcZ1oa55zyB4poBja2j94Tp85NzfYHGoSU2YUktNehAdhBfLLyKFigaGH6UCvCBQY24McYxbwUQMFZDf",
+      "weight": 100
+    }
+  ],
+  "maintainer_fee": 1,
+  "notes": "Aggiungi qui altri amici con il loro indirizzo XMR. Il weight è opzionale (se non lo metti, divide proporzionalmente all'hashrate)"
+}
