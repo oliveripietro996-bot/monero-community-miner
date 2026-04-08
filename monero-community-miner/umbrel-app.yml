@@ -1,0 +1,16 @@
+name: Monero Community Miner
+version: 1.0.0
+description: Mining Monero decentralizzato con redistribuzione automatica dei payout (fair-split)
+icon: https://raw.githubusercontent.com/oliverpietro996-bot/monero-community-miner/main/monero-community-miner/icon.png
+developer: oliverpietro996-bot
+website: https://github.com/oliverpietro996-bot/monero-community-miner
+submitter: oliverpietro996-bot
+repo: https://github.com/oliverpietro996-bot/monero-community-miner
+support: https://github.com/oliverpietro996-bot/monero-community-miner/issues
+category: [mining, monero, p2pool]
+gallery:
+  - https://raw.githubusercontent.com/oliverpietro996-bot/monero-community-miner/main/monero-community-miner/screenshot1.png
+  - https://raw.githubusercontent.com/oliverpietro996-bot/monero-community-miner/main/monero-community-miner/screenshot2.png
+tags: [monero, xmr, p2pool, mining, community]
+umbrelMinVersion: "1.0.0"
+port: 8080
