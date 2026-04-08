@@ -1,0 +1,59 @@
+version: "3.7"
+
+services:
+  monerod:
+    image: ghcr.io/sethforprivacy/monero:master
+    container_name: monero-community-miner-monerod
+    restart: unless-stopped
+    volumes:
+      - monero_data:/home/monero/.bitmonero
+    command: --prune-blockchain --enable-zmq --public-node --no-igd --p2p-bind-ip 0.0.0.0 --rpc-bind-ip 0.0.0.0 --confirm-external-bind --rpc-restricted-bind-ip 127.0.0.1
+
+  p2pool:
+    image: ghcr.io/sethforprivacy/p2pool:latest
+    container_name: monero-community-miner-p2pool
+    restart: unless-stopped
+    depends_on:
+      - monerod
+    volumes:
+      - p2pool_data:/home/p2pool/.p2pool
+    command: --host monerod --wallet ${WALLET_ADDRESS} --mini
+
+  xmrig-proxy:
+    build: ./monero-community-miner/xmrig-proxy-config
+    container_name: monero-community-miner-proxy
+    restart: unless-stopped
+    depends_on:
+      - p2pool
+    ports:
+      - "8888:8888"
+
+  dashboard:
+    build: ./monero-community-miner/dashboard
+    container_name: monero-community-miner-dashboard
+    restart: unless-stopped
+    depends_on:
+      - xmrig-proxy
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+
+  splitter:
+    build: ./monero-community-miner/splitter
+    container_name: monero-community-miner-splitter
+    restart: unless-stopped
+    depends_on:
+      - p2pool
+    volumes:
+      - ./monero-community-miner/splitter:/app
+
+  wallet-rpc:
+    image: ghcr.io/sethforprivacy/monero:master
+    container_name: monero-community-miner-wallet-rpc
+    restart: unless-stopped
+    command: --wallet-dir /wallet --rpc-bind-ip 127.0.0.1 --restricted-rpc
+
+volumes:
+  monero_data:
+  p2pool_data:
